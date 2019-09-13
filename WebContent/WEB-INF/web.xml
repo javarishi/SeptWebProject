@@ -8,6 +8,10 @@
 	<servlet>
 		<servlet-name>actorTest</servlet-name>
 		<servlet-class>com.h2kinfosys.servlet.ActorMgmtServlet</servlet-class>
+		<init-param>
+			<param-name>DBName</param-name>
+			<param-value>Sybase</param-value>
+		</init-param>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>actorTest</servlet-name>
