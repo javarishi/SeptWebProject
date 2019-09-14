@@ -18,5 +18,24 @@
 		<url-pattern>/actor</url-pattern>
 	</servlet-mapping>
 
-
+	<filter>
+		<filter-name>audit</filter-name>
+		<filter-class>com.h2kinfosys.servlet.AuditFilter</filter-class>
+		<init-param>
+			<param-name>directory</param-name>
+			<param-value>file/something/log</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>audit</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	<!-- Session timeout for entire application in minutes -->
+	<session-config>
+		<session-timeout>10</session-timeout>
+	</session-config>
+	
+	<listener>
+		<listener-class>com.h2kinfosys.servlet.listener.TestRequestListener</listener-class>
+	</listener>
 </web-app>

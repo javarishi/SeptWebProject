@@ -27,6 +27,7 @@ public class ActorMgmtServlet extends HttpServlet {
 		
 		Enumeration<String> params = req.getParameterNames();
 		String eachParam = null;
+		resp.setContentType("text/html");
 		PrintWriter out = resp.getWriter();
 		out.println("<HTML><body>");
 		
@@ -51,11 +52,23 @@ public class ActorMgmtServlet extends HttpServlet {
 		
 		// HttpServletRequest
 		req.setAttribute("ReqAttribute", "Keep information valid for Request");
-		
+		req.setAttribute("ReqAttribute", "Replaced Value");
+		req.removeAttribute("ReqAttribute");
 		// Session
 		HttpSession session = req.getSession();
 		session.setAttribute("sessionAttribute", "Keep information valid for Session / multiple request");
 		
+		long accessTime = session.getLastAccessedTime(); // when was this session used last 
+		session.getMaxInactiveInterval(); // Max Inactive time permitted for user
+		session.setMaxInactiveInterval(60);// in seconds  - after 1 minute session is inactive
+		
+		Customer cust = new Customer();
+		session.setAttribute("Customer", cust);
+		session.removeAttribute("Customer");
+		//session.invalidate(); // user log out happens with this method
+		
+		
+		out.println("<p>  </p>");
 		// Context
 		ServletContext context = getServletContext();
 		context.setAttribute("contextAttribute", "Keep information useful for entire application");
